@@ -1,7 +1,7 @@
 /*
  * File: server.go
  * ------------------------------
- * Implements simple server that provides the time. 
+ * Implements a simple server. 
  */
 
 package main
@@ -11,14 +11,21 @@ import (
     "net/http"
     "time"
     "strconv"
+    "math/rand"
+    // "io/ioutil"
+    "os/exec"
 )
 
 func handler(w http.ResponseWriter, r *http.Request) {
     // simple time server that responds to request with 
     // the current time, prints message to server console 
     // to acknowledge request
-    fmt.Fprintf(w, "Hi, the time is %s", time.Now())
     fmt.Println("Received connection.")
+    fmt.Fprintf(w, "Hi, the time is %s\n", time.Now())
+    fmt.Fprintf(w, "  Here's your random integer: " + strconv.Itoa(rand.Intn(100)) + "\n")
+    fortune, _ := exec.Command("fortune", "").Output()
+    fmt.Fprintf(w, "  Here's your fortune: \n" + string(fortune))
+
 }
 
 func getPort() string {
