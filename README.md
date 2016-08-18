@@ -1,2 +1,2 @@
 # GoFun
-exploring golang with a simple server example and ref for command exec, etc
+exploring golang with a simple server setup and ref for command exec, etc
